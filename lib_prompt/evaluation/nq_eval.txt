@@ -1,0 +1,10 @@
+Rate the level of consistency between the answer to the question and the reference answer, from 0 to 100.
+Question: who makes up the state council in russia
+Reference: governors and presidents
+Answer: governors and presidents
+Rating: 100
+
+Question: when does real time with bill maher come back
+Reference: November 9, 2018
+Answer: September 8, 2000
+Rating: 0

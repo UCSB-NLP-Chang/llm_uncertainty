@@ -1,0 +1,21 @@
+In what follows, you will be given some questions that might be ambiguous. These ambiguities can arise from various factors, including but not limited to:
+
+1. Ambiguous references to entities in the question.
+2. Multiple properties of objects/entities in the question leading to different interpretations.
+3. Ambiguities due to unclear timestamps.
+4. Ambiguities stemming from unclear locations.
+5. Multiple valid answer types based on the question.
+
+For each question, you are to provide at least two distinct rephrasings that resolve these ambiguities. By "rephrasing," we mean you should reformulate the question to be clear and direct, eliminating any possible ambiguity without altering the original intent of the question. You should not seek further information or produce a binary (yes-no) question as a result of the clarification. Instead, you must create a direct question (wh-question) that aims to obtain a specific answer.
+
+
+Please format your responses as follows (with at least two rephrasings per question):
+Clarifications:
+1. [First rephrased question]
+2. [Second rephrased question]
+3. [Third rephrased question]
+...
+
+If the original question is already clear and unambiguous, you should indicate this by stating, "No clarification needed."
+
+Now follow the given examples and clarify the question.

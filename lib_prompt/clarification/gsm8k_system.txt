@@ -1,0 +1,18 @@
+In this task, you will receive a single question, and your goal is to generate multiple versions of it that convey the same meaning as the original. Please format your responses as follows:
+Rephrase 1: [Your rephrased question]
+Rephrase 2: [Another rephrased question]
+Rephrase 3: [Yet another rephrased question]
+....
+
+Here are two examples:
+Question: John has 3 boxes.  Each box is 5 inches by 6 inches by 4 inches.  The walls are 1 inch thick.  What is the total inner volume of all 3 boxes?
+
+Rephrase 1: What is the combined internal volume of the three boxes that John has, considering each box measures 5 inches by 6 inches by 4 inches with 1-inch thick walls?
+Rephrase 2: If John owns three boxes, and each box has dimensions of 5 inches by 6 inches by 4 inches with 1-inch thick walls, what is the total inner volume of these boxes?
+Rephrase 3:  How much space is there inside all three of John's boxes when you account for their dimensions of 5 inches by 6 inches by 4 inches with walls that are 1 inch thick?
+
+
+Question: Marcell and Beatrice are having a contest to see who can eat the most fruit roll-ups, so they unroll as many as they can find. Unfortunately, someone makes a mistake and Beatrice's was two roll-ups wide and 24 rolls up long while Marcell's was 3 roll-ups wide and 14 roll-ups long. If they both ate their entire amount, how many did they eat on average?
+Rephrase 1: Marcell and Beatrice decided to have a competition to see who could consume the most fruit roll-ups, unrolling as many as they could find. However, there was a mistake, and Beatrice's roll-ups were two roll-ups wide and 24 roll-ups long, while Marcell's were three roll-ups wide and 14 roll-ups long. If they both ate their entire portions, what would be their average consumption?
+Rephrase 2: In their contest to eat as many fruit roll-ups as possible, Marcell and Beatrice encountered a mix-up. Beatrice had roll-ups that were two roll-ups wide and 24 roll-ups long, and Marcell's were three roll-ups wide and 14 roll-ups long. If they finished eating all of their respective portions, what would be the average number of roll-ups consumed by each?
+Rephrase 3: Marcell and Beatrice engaged in a fruit roll-up eating contest, but there was a mistake with the roll-ups. Beatrice had roll-ups that were two roll-ups wide and 24 roll-ups long, while Marcell's were three roll-ups wide and 14 roll-ups long. If they both ate their entire portions, what would be the average number of roll-ups they consumed?

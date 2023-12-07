@@ -1,0 +1,59 @@
+**Task: Answer Extraction from Sentences**
+
+In this task, you will receive both a question and multiple sentences. Each sentence contains an answer to the question. Your primary goal is to extract a concise answer, which can be a single word or a short phrase, from each sentence. Again, ensure you only extract a short answer! If a short answer cannot be directly extracted, then summarize the whole sentence into a single word or a short phrase.
+
+Additionally, while extracting answers, your secondary goal is to create an "answer set" that contains all distinct answers from previous questions. If the extracted answer has not appeared in the answer set, add it to the answer set.
+
+**Important Rules**
+1. If there is an answer in the answer set that is semantically equivalent to the extracted answer, use the answer from the answer set as the result. Do not introduce a new, slightly different answer. For example, if the answer set already contains "the matrix (1999)," and you extract an answer from a sentence like "The popular movie in 1999... is the matrix," your extraction should be "the matrix (1999)" rather than "the matrix."
+
+2. Separate different answers in the answer set using "|".
+
+3. Also, extract the answer as "Unknown" for the following cases:
+    - The sentence claims that there is no answer to the question
+    - The sentence claims it lacks sufficient information to answer the question
+    - The sentence claims it depends on various factors and the answer cannot be determined
+
+
+**Output Format**
+
+Your output format should follow this pattern (N is the number of sentences):
+
+Answer set at the beginning: [ ]
+Extraction 1/N: [extraction from 1st sentence]
+Updated answer set: [ ]
+Extraction 2/N: [extraction from 2nd sentence]
+Updated answer set: [ ]
+Extraction 3/N: [extraction from 3rd sentence]
+Updated answer set: [ ]
+...
+Final answer set: [ ]
+
+**Example**
+Q: Who plays the character of Dr. Evelyn Vogel in Dexter Season 1?
+A1: In Season 8 of Dexter, the character of Dr. Evelyn Vogel is portrayed by actress Charlotte Rampling.
+A2: In Season 8 of Dexter, Dr. Evelyn Vogel is portrayed by actress Dr. Charlotte Rampling.
+A3: I'm sorry, I don't have access to real-life military training information
+A4: Charlotte S. Rampling.
+A5: In Season 8 of Dexter, the character of Dr. Evelyn Vogel is portrayed by actress Smith John.
+A6: Dr. Evelyn Vogel was played by Dr. Evelyn Vogel
+A7: Dr. Madry was played by Charlotte Rampling. There is no character of Dr. Evelyn Vogel.
+A8: Dr. Evelyn Vogel was played by Dexter Season 1 itself.
+Answer set at the beginning: []
+Extraction 1/8: Charlotte Rampling
+Updated answer set: [Charlotte Rampling]
+Extraction 2/8: Charlotte Rampling
+Updated answer set: [Charlotte Rampling]
+Extraction 3/8: Unknown
+Updated answer set: [Charlotte Rampling | Unknown]
+Extraction 4/8: Charlotte S. Rampling (Fuzzing match for names and regard Charlotte S. Rampling. as the same person Charlotte Rampling. So, we do not add Charlotte S. Rampling to the answer set)
+Updated answer set: [Charlotte Rampling | Unknown]
+Extraction 5/8: Smith John
+Updated answer set: [Charlotte Rampling | Unknown | Smith John]
+Extraction 6/8: Evelyn Vogel
+Updated answer set: [Charlotte Rampling | Unknown | Smith John | Evelyn Vogel]
+Extraction 7/8: Charlotte Rampling
+Updated answer set: [Charlotte Rampling | Unknown | Smith John | Evelyn Vogel]
+Extraction 8/8: Dexter Season 1
+Updated answer set: [Charlotte Rampling | Unknown | Smith John | Evelyn Vogel | Dexter Season 1]
+Final answer set: [Charlotte Rampling | Unknown | Smith John | Evelyn Vogel | Dexter Season 1]
