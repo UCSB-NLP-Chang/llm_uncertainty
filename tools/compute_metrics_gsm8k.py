@@ -49,6 +49,6 @@ for thres in thres_cdts:
     corr_f1 = f1_score(tgt_mistake_labels, pred_mistake_labels)
 
     all_f1s.append(corr_f1)
-print(np.max(all_f1s))
+print("best f1: ", np.max(all_f1s))
 
 

@@ -78,10 +78,10 @@ def extract_clarification_nq(model_ans: str):
 def extract_clarification_gsm8k(model_output: str):
     extract_list = []
     lines = model_output.split('\n')
-    last_line = lines[-1]
-    if last_line.startswith("Rephrase: "):
-        last_line = last_line[len("Rephrase: "): ]
-        extract_list.append(last_line)
+    for line in lines:
+        if line.startswith("Rephrase "):
+            line = line[len("Rephrase 1: "): ]
+            extract_list.append(line)
     return extract_list, []
 
 def extract_clarification(model_output, dataset_name):
@@ -151,8 +151,7 @@ def main(args):
     test_data = load_data(args.dataset_name)
 
     all_results = []
-    for idx in tqdm.tqdm(range(len(test_data[:1]))):
-        print(idx)
+    for idx in tqdm.tqdm(range(len(test_data))):
         case = test_data[idx]
         prompt_full = format_query(case, args.dataset_name, user_prompt, icl_selector)
 

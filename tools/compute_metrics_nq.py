@@ -59,6 +59,6 @@ for thres in thres_cdts:
     tgt_correctness_labels = ys_array
     corr_f1 = f1_score(tgt_correctness_labels, pred_correctness_labels)
     all_f1s.append(corr_f1)
-print(np.max(all_f1s))
+print("best f1: ", np.max(all_f1s))
 
 

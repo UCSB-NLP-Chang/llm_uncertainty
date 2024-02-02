@@ -62,7 +62,7 @@ for thres in thres_cdts:
     all_f1s.append(corr_f1)
 
 best_idx = np.argmax(all_f1s)
-print(np.max(all_f1s))
+print("best f1: ", np.max(all_f1s))
 print('best precision: ', all_precisions[best_idx])
 print("best recall: ", all_recalls[best_idx])
 print("best thres: ", thres_cdts[best_idx])

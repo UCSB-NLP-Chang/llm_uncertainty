@@ -2,9 +2,7 @@ import string
 import re
 import openai
 from tenacity import retry, wait_chain, wait_fixed
-openai.api_key = "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" # used my own key
-
-from torch.nn import LayerNorm
+openai.api_key = "sk-" # used my own key
 
 @retry(wait=wait_chain(*[wait_fixed(1) for i in range(3)] +
                        [wait_fixed(2) for i in range(2)] +

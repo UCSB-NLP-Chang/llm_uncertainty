@@ -5,6 +5,7 @@ import json
 import numpy as np
 np.set_printoptions(precision=3, suppress = True)
 from src.common import gsm8k_extract_ans
+from src.config import SAMPLE_N
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -33,7 +34,7 @@ def compute_entropy(vec: np.ndarray):
 filepath = args.log_path
 with open(filepath, 'r', encoding='utf-8') as f:
     content = json.load(f)
-best_n = 20
+best_n = SAMPLE_N
 
 num_examples = len(content)
 

@@ -5,6 +5,7 @@ import numpy as np
 np.set_printoptions(precision=3, suppress = True)
 from src.common import majority_vote, remove_punctuation, check_answers
 from src.evaluation import recursive_normalize
+from src.config import SAMPLE_N
 from jiwer import wer
 
 import argparse
@@ -66,7 +67,7 @@ class FuzzingDict():
 filepath = args.log_path
 with open(filepath, 'r', encoding='utf-8') as f:
     content = json.load(f)
-best_n = 10
+best_n = SAMPLE_N
 
 num_examples = len(content)
 
@@ -105,14 +106,13 @@ for q_idx in range(num_examples):
     gt_ans = recursive_normalize(gt_ans)
     orig_q = question_list[q_idx]
 
-    curr_all_rewrite_cots = raw_output_label_sets
-    num_rewrite = len(curr_all_rewrite_cots)
+    num_rewrite = len(raw_output_label_sets)
     if num_rewrite == 0:
         raise NotImplementedError
 
     all_cdt_answers = []
     for rewrite_idx in range(num_rewrite):
-        rewrite_answer_lists = curr_all_rewrite_cots[rewrite_idx]
+        rewrite_answer_lists = raw_output_label_sets[rewrite_idx]
         all_cdt_answers = all_cdt_answers + rewrite_answer_lists
 
     rewrite_freq_mat = []
@@ -125,18 +125,28 @@ for q_idx in range(num_examples):
 
     output_space_size = (len(idx2ans))
     for rewrite_idx in range(num_rewrite):
-        rewrite_answer_list = curr_all_rewrite_cots[rewrite_idx]
+        rewrite_answer_list = raw_output_label_sets[rewrite_idx]
         print(rewrite_answer_list)
         if rewrite_answer_list is None:
             all_unk = True
             break
 
         rewrite_freq_array = np.zeros(len(idx2ans))
-        if len(idx2ans) <= 1 and 'unknown' in rewrite_answer_list:
+        if len(idx2ans) <= 1 and 'unknown' in rewrite_answer_list: 
+            ### special case 1:
+            ### there is only one answer in the output given the current clarification
+            ### and the answer is "unknown", means this clarification is very possible to be invalid
+            ### for example, the model clarify "when did lionel messi when the world cup" as "when did lionel messi when the world cup in 2015"
+            ### So we skip this clarification
             continue
 
         for idx, ans in enumerate(rewrite_answer_list):
             if ans == "unknown":
+                ### special case 2:
+                ### there are multiple different answers in the output given the current clarification
+                ### and the current answer is "unknown"
+                ### in this case, we regard it as epistemic uncertainty (i.e., the model directly answer the question with "sorry i do not know" or similar answers)
+                ### to handle this case, we add the frequency of other answers (except unknown) by 1 / (total different answers - 1) and leave the frequency of "unknown" unchanged
                 rewrite_freq_array = rewrite_freq_array + 1/(output_space_size - 1)
                 rewrite_freq_array[ans2idx['unknown']] = rewrite_freq_array[ans2idx['unknown']] - 1/(output_space_size - 1)
             else:
@@ -149,6 +159,10 @@ for q_idx in range(num_examples):
 
 
     if all_unk or len(rewrite_freq_mat) == 0:
+        ### if all clarifications belongs to special case 1
+        ### that means the clarificaiton LLM gives us a series of invalid clarifications
+        ### in such a case, we regard the LLM does not have enough knowledge for this question
+        ### and we manually set the epistemic (model) uncertainty as 1 and aleatoric (data) uncertainty as 0
         posterior_entropy = 1
         data_uncertainty = 0
         model_uncertainty = posterior_entropy - data_uncertainty

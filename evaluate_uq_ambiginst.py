@@ -7,6 +7,7 @@ np.set_printoptions(precision=3, suppress = True)
 from jiwer import wer
 from src.evaluation import recursive_normalize
 from src.common import ambiginst_extract_ans
+from src.config import SAMPLE_N
 
 import argparse
 
@@ -61,7 +62,7 @@ with open(args.log_path, 'r', encoding='utf-8') as f:
     content = json.load(f)
 
 
-best_n = 10
+best_n = SAMPLE_N
 
 num_examples = len(content)
 
